@@ -1,0 +1,69 @@
+{% extends 'adminbase.html' %}
+{% load static %}
+{% block title %}Admin Home{% endblock title %}
+{% block body %}
+
+<br>
+<h3 class="text-black"><u>User Details</u></h3>
+<br>
+<form method="GET" action="{% url 'adminhome' %}">
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Search by name or email" name="q" value="{{ request.GET.q }}">
+    <div class="input-group-append">
+      <button class="btn btn-outline-secondary" type="submit">Search</button>
+    </div>
+  </div>
+</form>
+<br>
+<table class="table table-dark mt-2">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Password</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for i in s %}
+    <tr>
+      <th scope="row">{{ i.id }}</th>
+      <td>{{ i.username }}</td>
+      <td>{{ i.email }}</td>
+      <td>{{ i.password }}</td>
+      <td>
+        <button type="button" class="btn btn-primary"><a class="text-light" href="/updateuser/{{ i.id }}">Update</a></button>
+        <button type="button" class="btn btn-danger"><a class="text-light" href="/delete/{{ i.id }}">Delete</a></button>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<h3 class="text-black"><u>Admin Details</u></h3>
+<br>
+<table class="table table-dark mt-2">
+  <thead>
+    <tr>
+      <th scope="col">id</th>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for l in p %}
+    <tr>
+      <th scope="row">{{ l.id }}</th>
+      <td>{{ l.username }}</td>
+      <td>{{ l.email }}</td>
+      <td></td>
+      <td>
+        <button type="button" class="btn btn-primary"><a class="text-light" href="">Update</a></button>
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock body %}
